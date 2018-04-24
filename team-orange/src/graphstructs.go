@@ -1,6 +1,10 @@
 package main
 
+import (
+	"time"
+)
+
 type Graphpoint struct {
-	Timestamp	string
+	Timestamp time.Time
 	Temperature	Temperature
 }

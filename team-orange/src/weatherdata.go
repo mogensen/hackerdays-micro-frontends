@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"log"
+	"time"
 	"fmt"
 	"encoding/xml"
 	"encoding/json"
@@ -33,6 +34,15 @@ func printSlice(s []Graphpoint) {
 	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
 }
 
+func parseDate(timestamp string ) time.Time {
+    layout := "2006-01-02T15:04:05"
+    t, err := time.Parse(layout, timestamp)
+    if err != nil {
+		log.Fatal(err)
+	}
+    return t
+}
+
 func fetchData() []Graphpoint{
 	if data, err := getContent("https://www.yr.no/sted/Danmark/Midtjylland/Skanderborg/forecast.xml"); err != nil {
 		log.Printf("Failed to get XML: %v", err)
@@ -46,7 +56,8 @@ func fetchData() []Graphpoint{
 		for _, time := range x.Time {
 			// append works on nil slices.
 			var temperatur = new(Graphpoint)
-			temperatur.Timestamp = time.From
+			temperatur.Timestamp = parseDate(time.From)
+
 			temperatur.Temperature = time.Temperature[0]	
 			s = append(s, *temperatur)	
 		}
