@@ -44,7 +44,11 @@ func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.P
 				return fmt.Sprintf("%d-%d/%d", typed.Month(), typed.Day(), typed.Year())
 			},
 		},
-
+		YAxis: chart.YAxis{
+			Style: chart.Style{
+				Show: true, //enables / displays the y-axis
+			},
+		},
 		Series: []chart.Series{
 			chart.ContinuousSeries{
 				XValues: dates,

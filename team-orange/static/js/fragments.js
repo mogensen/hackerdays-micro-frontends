@@ -21,19 +21,35 @@ class OrangeRecos extends HTMLElement {
         div.setAttribute("id", "chart");
 
         this.innerHTML = div.outerHTML;
-        
-        var chart = c3.generate({
-            bindto: "#chart",
-            data: {
-              columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 50, 20, 10, 40, 15, 25]
-              ]
-            },
-            tooltip: {
-                show: true
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', "/orange/api/weather");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var chart = c3.generate({
+                    bindto: "#chart",
+                    data: {
+                        xFormat: '%Y-%m-%dT%H:%M:%SZ',
+                        json: JSON.parse(xhr.responseText),
+                        keys: {
+                            x: 'Timestamp',
+                            value: ['Temperature.Value'],
+                        }
+                    },
+                    axis: {
+                        x: {
+                            type: 'timeseries',
+                            tick: { format: '%Y-%m-%d %H:%M' }
+                        }
+                    },
+                    tooltip: { show: true }
+                });
             }
-        });
+            else {
+                alert('Request failed.  Returned status of ' + xhr.status);
+            }
+        };
+        xhr.send();
     }
     disconnectedCallback() {
         const sku = this.getAttribute('sku');
