@@ -51,10 +51,15 @@ dd {
       'store basket  reco'
       'image name    reco'
       'image options reco'
-      'image buy     reco';
+      'image buy     reco'
+      'orange orange orange';
     grid-template-columns: 4fr 3fr 200px;
     width: 1000px;
   }
+}
+
+#orange {
+  grid-area: orange;
 }
 
 #store {
