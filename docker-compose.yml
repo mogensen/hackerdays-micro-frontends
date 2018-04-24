@@ -28,3 +28,10 @@ services:
      - "3003:3003"
     volumes:
      - ./team-red/src:/code/src
+
+  team_orange:
+    build: ./team-orange
+    ports:
+     - "3004:3004"
+    volumes:
+     - ./team-orange/src:/code/src
