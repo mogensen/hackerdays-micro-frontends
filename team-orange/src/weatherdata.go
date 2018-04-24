@@ -33,7 +33,7 @@ func printSlice(s []Graphpoint) {
 	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
 }
 
-func getWeatherDataHandler(out http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func fetchData() []Graphpoint{
 	if data, err := getContent("https://www.yr.no/sted/Danmark/Midtjylland/Skanderborg/forecast.xml"); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
@@ -45,8 +45,6 @@ func getWeatherDataHandler(out http.ResponseWriter, r *http.Request, _ httproute
 		xml.Unmarshal(data, x)
 		
 		var s []Graphpoint
-		printSlice(s)
-
 		for _, time := range x.Time {
 			// append works on nil slices.
 			var temperatur = new(Graphpoint)
@@ -54,17 +52,22 @@ func getWeatherDataHandler(out http.ResponseWriter, r *http.Request, _ httproute
 			temperatur.Temperature = time.Temperature[0]	
 			s = append(s, *temperatur)	
 		}
-		printSlice(s)
-		
-		out.Header().Set("Content-Type", "application/json; charset=UTF-8")
-
-		if b, err := json.Marshal(s); err != nil {
-			log.Printf("Failed to marshal json: %v", err)
-		} else {
-			fmt.Fprintf(out, string(b))
-		}
+		return s
 	}
+	return nil
+}
 
+func getWeatherDataHandler(out http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	var s = fetchData()
+	printSlice(s)
+	
+	out.Header().Set("Content-Type", "application/json; charset=UTF-8")
+
+	if b, err := json.Marshal(s); err != nil {
+		log.Printf("Failed to marshal json: %v", err)
+	} else {
+		fmt.Fprintf(out, string(b))
+	}
 	
 	// for _, episode := range q.EpisodeList {
 	// 	fmt.Printf("\t%s\n", episode)
