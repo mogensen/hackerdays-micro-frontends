@@ -37,9 +37,7 @@ func fetchData() []Graphpoint{
 	if data, err := getContent("https://www.yr.no/sted/Danmark/Midtjylland/Skanderborg/forecast.xml"); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
-		log.Println("Received XML:")
-		log.Println(string(data))
-
+		
 		x := new(Weatherdata)
 		// var weatherdata Weatherdata
 		xml.Unmarshal(data, x)

@@ -8,16 +8,20 @@ import (
 	"strconv" 
 	"time"
 	"github.com/wcharczuk/go-chart" //exposes "chart"
-	util "github.com/wcharczuk/go-chart/util"
 )
 
 func parseDate(timestamp string ) float64{
-    layout := "2018-04-26T12:00:00"
+    layout := "2006-01-02T15:04:05"
     t, err := time.Parse(layout, timestamp)
     if err != nil {
+		log.Println(err)
 		return 0
 	}
     return float64(t.Unix())
+}
+
+func printSlicefloat(s []float64) {
+	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
 }
 
 func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.Params) {
@@ -34,6 +38,8 @@ func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.P
 		v, _ := strconv.ParseFloat(point.Temperature.Value, 64)
 		points = append(points, v)
 	}
+	printSlicefloat(points)
+	printSlicefloat(dates)
 	graph := chart.Chart{
 		XAxis: chart.XAxis{
 			Style: chart.Style{
@@ -41,9 +47,13 @@ func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.P
 			},
 			TickPosition: chart.TickPositionBetweenTicks,
 			ValueFormatter: func(v interface{}) string {
-				typed := v.(float64)
-				typedDate := util.Time.FromFloat64(typed)
-				return fmt.Sprintf("%d-%d\n%d", typedDate.Month(), typedDate.Day(), typedDate.Year())
+				typed := int64(v.(float64))
+				
+				typedDate := time.Unix(typed, 0)
+				log.Println(typed)
+				log.Println(typedDate)
+				
+				return fmt.Sprintf("%d-%d/%d", typedDate.Month(), typedDate.Day(), typedDate.Year())
 			},
 		},
 
