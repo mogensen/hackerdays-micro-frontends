@@ -49,7 +49,8 @@ export default function renderPage(sku = 't_porsche') {
     <div id="options">${product.variants.map(v => renderOption(v, sku)).join('')}</div>
     <blue-buy id="buy" sku="${variant.sku}"><!--#include virtual="/blue-buy?sku=${encodeURIComponent(variant.sku)}" --></blue-buy>
     <green-recos id="reco" sku="${variant.sku}"><!--#include virtual="/green-recos?sku=${encodeURIComponent(variant.sku)}" --></green-recos>
-    <!-- incude custom element from team-orange here -->
+   
+    <orange-recos id="orange" ></orange-recos>
     
   `;
 }

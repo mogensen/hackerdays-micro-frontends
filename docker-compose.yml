@@ -34,4 +34,4 @@ services:
     ports:
      - "3004:3004"
     volumes:
-     - ./team-orange/src:/code/src
+     - ./team-orange/src:/go/src/app

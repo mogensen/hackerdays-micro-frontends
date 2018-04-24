@@ -9,12 +9,13 @@ WORKDIR /go/src/app
 RUN go get ./
 RUN go build
 
-CMD if [ ${APP_ENV} == "production" ]; \
-	then \
-	app; \
-	else \
-	go get github.com/pilu/fresh && \
-	fresh; \
-	fi
+CMD app
 	
+#CMD if [ ${APP_ENV} == "production" ]; \
+#	then \
+#	app; \
+#	else \
+#	go get github.com/pilu/fresh && \
+#	fresh; \
+#	fi
 EXPOSE 8080
