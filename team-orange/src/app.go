@@ -22,15 +22,17 @@ func main() {
 	router := httprouter.New()
 	router.GET("/orange/api/", indexHandler)
 	router.ServeFiles("/orange/static/*filepath", http.Dir("/go/src/app/static/"))
-	router.GET("/orange/graph", renderHandler)
 	
+	router.GET("/orange/graph/", renderHandler)
+	router.GET("/orange/graph/:type", renderHandler)
+
 	// print env
 	env := os.Getenv("APP_ENV")
 	if env == "production" {
 		log.Println("Running api server in production mode")
 	} else {
 		log.Println("Running api server in dev mode")
-	}
+	}	
 
 	log.Fatal(http.ListenAndServe(":3004", router))
 }
