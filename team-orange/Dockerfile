@@ -1,21 +1,17 @@
 FROM golang
 
-ARG app_env
-ENV APP_ENV $app_env
-
-COPY ./src /go/src/app
+RUN mkdir -p /go/src/app
 WORKDIR /go/src/app
 
-RUN go get ./
+COPY get.sh /go/src/app
+RUN bash get.sh
+
+COPY ./src /go/src/app
+
+RUN go get -v ./...
+
 RUN go build
 
 CMD app
-	
-#CMD if [ ${APP_ENV} == "production" ]; \
-#	then \
-#	app; \
-#	else \
-#	go get github.com/pilu/fresh && \
-#	fresh; \
-#	fi
-EXPOSE 8080
+
+EXPOSE 3004

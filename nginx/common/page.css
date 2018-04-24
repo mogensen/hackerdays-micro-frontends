@@ -204,6 +204,12 @@ dd {
   padding: 15px;
 }
 
+orange-recos {
+  display: block;
+  outline: 3px dashed orange;
+  width: 100%;
+}
+
 green-recos {
   display: block;
   outline: 3px dashed forestgreen;

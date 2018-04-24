@@ -33,5 +33,5 @@ services:
     build: ./team-orange
     ports:
      - "3004:3004"
-    volumes:
-     - ./team-orange/src:/go/src/app
+#   volumes:
+#     - ./team-orange/src:/go/src/app

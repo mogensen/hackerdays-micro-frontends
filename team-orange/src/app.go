@@ -39,7 +39,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	  }
 	}
 	
-	export default OrangeRecos;
 	window.customElements.define('orange-recos', OrangeRecos);
 	`
 	w.Header().Set("Content-Type", "application/javascript; charset=UTF-8")
@@ -50,8 +49,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 func main() {
 	router := httprouter.New()
 	router.GET("/", indexHandler)
-	router.GET("/*", indexHandler)
-
+	router.GET("/orange/fragments.js", indexHandler)
+	
 	// print env
 	env := os.Getenv("APP_ENV")
 	if env == "production" {
