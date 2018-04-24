@@ -96,6 +96,10 @@ dd {
   width: 100%;
 }
 
+.graph-image {
+  width: 100%;
+}
+
 #image > div {
   padding-top: 100%;
   position: relative;

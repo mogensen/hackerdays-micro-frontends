@@ -50,7 +50,8 @@ export default function renderPage(sku = 't_porsche') {
     <blue-buy id="buy" sku="${variant.sku}"><!--#include virtual="/blue-buy?sku=${encodeURIComponent(variant.sku)}" --></blue-buy>
     <green-recos id="reco" sku="${variant.sku}"><!--#include virtual="/green-recos?sku=${encodeURIComponent(variant.sku)}" --></green-recos>
    
-    <orange-recos id="orange" ></orange-recos>
-    
+    <orange-recos id="orange" sku="${variant.sku}">
+      <!--#include virtual="/orange/static/graph.html" -->
+    </orange-recos>
   `;
 }

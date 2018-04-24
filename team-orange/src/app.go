@@ -23,6 +23,7 @@ func main() {
 	router.GET("/orange/api/", indexHandler)
 	router.ServeFiles("/orange/static/*filepath", http.Dir("/go/src/app/static/"))
 	router.GET("/orange/graph", renderHandler)
+	
 	// print env
 	env := os.Getenv("APP_ENV")
 	if env == "production" {
