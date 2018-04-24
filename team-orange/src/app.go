@@ -19,7 +19,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 func main() {
 
+	
 	router := httprouter.New()
+	router.GET("/orange/api/weather", getWeatherDataHandler)
+	
 	router.GET("/orange/api/", indexHandler)
 	router.ServeFiles("/orange/static/*filepath", http.Dir("/go/src/app/static/"))
 	
@@ -35,4 +38,5 @@ func main() {
 	}	
 
 	log.Fatal(http.ListenAndServe(":3004", router))
+	
 }
