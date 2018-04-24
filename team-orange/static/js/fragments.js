@@ -34,12 +34,20 @@ class OrangeRecos extends HTMLElement {
                         keys: {
                             x: 'Timestamp',
                             value: ['Temperature.Value'],
-                        }
+                        },
+                        
                     },
                     axis: {
                         x: {
                             type: 'timeseries',
                             tick: { format: '%Y-%m-%d %H:%M' }
+                        },
+                        y: {
+                            show: true,
+                            label: {
+                                text: 'Temp (C)',
+                                position: 'outer-middle'
+                            }
                         }
                     },
                     tooltip: { show: true }

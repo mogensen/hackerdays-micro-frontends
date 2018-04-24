@@ -45,6 +45,8 @@ func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.P
 			},
 		},
 		YAxis: chart.YAxis{
+			Name: "Temp (C)",
+			NameStyle: chart.StyleShow(),
 			Style: chart.Style{
 				Show: true, //enables / displays the y-axis
 			},
