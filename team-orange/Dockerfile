@@ -12,7 +12,7 @@ RUN go get -v ./...
 
 RUN go build
 
-CMD app
+ENTRYPOINT [ "./app" ]
 COPY ./static /go/src/app/static
 
 EXPOSE 3004

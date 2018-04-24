@@ -3,23 +3,24 @@ package main
 import (
 	"fmt"
 	"github.com/julienschmidt/httprouter"
-	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"github.com/braintree/manners"
 )
 
-
 func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-
 	var js = `{ "test" : 123}`
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-
 	fmt.Fprintf(w, js)
 }
 
 func main() {
-
 	
+	shutdown := make(chan int)
+	//create a notification channel to shutdown
+	sigChan := make(chan os.Signal, 1)
+
 	router := httprouter.New()
 	router.GET("/orange/api/weather", getWeatherDataHandler)
 	
@@ -29,14 +30,21 @@ func main() {
 	router.GET("/orange/graph/", renderHandler)
 	router.GET("/orange/graph/:type", renderHandler)
 
-	// print env
-	env := os.Getenv("APP_ENV")
-	if env == "production" {
-		log.Println("Running api server in production mode")
-	} else {
-		log.Println("Running api server in dev mode")
-	}	
+	server := manners.NewWithServer(&http.Server{Addr: ":3004", Handler: router})
+	go func() {		
+		fmt.Println("Http server up and running")
+		server.ListenAndServe()
+		shutdown <- 1
+	}()
 
-	log.Fatal(http.ListenAndServe(":3004", router))
-	
+	//register for interupt (Ctrl+C) and SIGTERM (docker)
+	signal.Notify(sigChan)
+	go func() {
+		fmt.Println("Waiting for shut down...")
+		<-sigChan
+		fmt.Println("Shutting down...")
+		server.Close()
+	}()
+
+	<-shutdown
 }
