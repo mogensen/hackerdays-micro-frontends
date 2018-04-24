@@ -40,7 +40,8 @@ dd {
       'image name'
       'image options'
       'image buy'
-      'reco reco';
+      'reco reco'
+      'orange orange';
     grid-template-columns: 4fr 3fr;
   }
 }
