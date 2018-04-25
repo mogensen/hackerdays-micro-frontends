@@ -36,24 +36,18 @@ dd {
 @media only screen and (max-width: 999px) {
   #app {
     grid-template-areas:
-      'store basket'
-      'image name'
-      'image options'
-      'image buy'
+      'info info'
       'reco reco'
       'orange orange';
-    grid-template-columns: 4fr 3fr;
+    grid-template-columns: 4fr 8fr;
   }
 }
 
 @media only screen and (min-width: 1000px) {
   #app {
     grid-template-areas:
-      'store basket  reco'
-      'image name    reco'
-      'image options reco'
-      'image buy     reco'
-      'orange orange orange';
+      'info   info   reco'
+      'orange orange reco';
     grid-template-columns: 4fr 3fr 200px;
     width: 1000px;
   }
@@ -61,6 +55,11 @@ dd {
 
 #orange {
   grid-area: orange;
+  height: 300px;
+}
+
+#info {
+  grid-area: info;
 }
 
 #store {
@@ -186,7 +185,6 @@ dd {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 20px;
     padding-top: 20px;
   }
 }
@@ -212,6 +210,12 @@ dd {
 #app {
   outline: 3px dashed orangered;
   padding: 15px;
+}
+
+red-info {
+  display: block;
+  outline: 3px dashed darkred;
+  width: 100%;
 }
 
 orange-recos {

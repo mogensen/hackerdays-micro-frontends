@@ -10,11 +10,6 @@ import (
 	"github.com/wcharczuk/go-chart" //exposes "chart"
 )
 
-
-func printSlicefloat(s []float64) {
-	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
-}
-
 func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.Params) {
 
 	var graphtype = params.ByName("type"); 
@@ -23,13 +18,11 @@ func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.P
 	var points []float64
 	var dates []float64
 	for _, point := range ikkeJson {
-		log.Println(point)
 		dates = append(dates, float64(point.Timestamp.Unix()))
 		v, _ := strconv.ParseFloat(point.Temperature.Value, 64)
 		points = append(points, v)
 	}
-	printSlicefloat(points)
-	printSlicefloat(dates)
+
 	graph := chart.Chart{
 		XAxis: chart.XAxis{
 			Style: chart.Style{
@@ -38,9 +31,7 @@ func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.P
 			TickPosition: chart.TickPositionBetweenTicks,
 			ValueFormatter: func(v interface{}) string {
 				typed := time.Unix(int64(v.(float64)), 0)
-				
-				log.Println(typed)
-				
+								
 				return fmt.Sprintf("%d-%d/%d", typed.Month(), typed.Day(), typed.Year())
 			},
 		},

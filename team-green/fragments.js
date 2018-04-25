@@ -2,9 +2,9 @@
 /* globals HTMLElement, window */
 (function fragments() {
   const recos = {
-    t_porsche: ['3', '5', '6'],
-    t_fendt: ['3', '6', '4'],
-    t_eicher: ['1', '8', '7'],
+    temperature: ['1'],
+    pressure: ['3', '6', '4'],
+    windspeed: ['1', '8', '7'],
   };
 
   class GreenRecos extends HTMLElement {
@@ -25,7 +25,7 @@
       const reco = recos[sku] || [];
       this.innerHTML = `
         <h3>Related Products</h3>
-        ${reco.map(id => `<img src="./team-green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
+        ${reco.map(id => `<img src="/green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
       `;
     }
     disconnectedCallback() {
