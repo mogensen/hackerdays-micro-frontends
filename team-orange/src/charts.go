@@ -14,13 +14,26 @@ func renderHandler(out http.ResponseWriter, r *http.Request, params httprouter.P
 
 	var graphtype = params.ByName("type"); 
 	log.Println("We have a type for the stuff:", graphtype)
+
 	var ikkeJson = fetchData()
 	var points []float64
 	var dates []float64
+
 	for _, point := range ikkeJson {
 		dates = append(dates, float64(point.Timestamp.Unix()))
-		v, _ := strconv.ParseFloat(point.Temperature.Value, 64)
-		points = append(points, v)
+
+		if graphtype == "temperature" {
+			v, _ := strconv.ParseFloat(point.Temperature.Value, 64)
+			points = append(points, v)
+
+		} else if graphtype == "pressure" {
+			v, _ := strconv.ParseFloat(point.Pressure.Value, 64)
+			points = append(points, v)
+
+		} else if graphtype == "precipitation" {
+			v, _ := strconv.ParseFloat(point.Precipitation.Value, 64)
+			points = append(points, v)
+		}
 	}
 
 	graph := chart.Chart{

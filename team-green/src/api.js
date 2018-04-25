@@ -1,7 +1,7 @@
 const data = {
   temperature: ['1'],
   pressure: ['3', '6', '4'],
-  windspeed: ['1', '8', '7'],
+  precipitation: ['1', '8', '7'],
 };
 
 export default function recoApi(req, res) {

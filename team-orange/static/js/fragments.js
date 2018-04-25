@@ -21,9 +21,22 @@ class OrangeRecos extends HTMLElement {
         div.setAttribute("id", "chart");
 
         this.innerHTML = div.outerHTML;
+        var dataline = "";
+        var ylabel = "";
+
+        if (sku == "temperature") {
+            dataline = 'Temperature.Value'
+            ylabel =  'Temp (C)';
+        } else if (sku == "precipitation") {
+            dataline = 'Precipitation.Value'
+            ylabel = 'Regn i mm'
+        } else if (sku == "pressure") {
+            dataline = 'Pressure.Value'
+            ylabel = 'Mm kviksølv'
+        }
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', "/orange/api/weather");
+        xhr.open('GET', "/orange/api/weather/");
         xhr.onload = function () {
             if (xhr.status === 200) {
                 var chart = c3.generate({
@@ -33,7 +46,7 @@ class OrangeRecos extends HTMLElement {
                         json: JSON.parse(xhr.responseText),
                         keys: {
                             x: 'Timestamp',
-                            value: ['Temperature.Value'],
+                            value: [dataline],
                         },
                         
                     },
@@ -45,7 +58,7 @@ class OrangeRecos extends HTMLElement {
                         y: {
                             show: true,
                             label: {
-                                text: 'Temp (C)',
+                                text: ylabel,
                                 position: 'outer-middle'
                             }
                         }
