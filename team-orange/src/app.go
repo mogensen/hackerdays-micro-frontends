@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"syscall"
 	"github.com/braintree/manners"
 )
 
@@ -41,11 +42,11 @@ func main() {
 	}()
 
 	//register for interupt (Ctrl+C) and SIGTERM (docker)
-	signal.Notify(sigChan)
+	signal.Notify(sigChan, syscall.SIGTERM)
 	go func() {
-		fmt.Println("Waiting for shut down...")
 		<-sigChan
-		fmt.Println("Shutting down...")
+		fmt.Println("Shutting down....")
+
 		server.Close()
 	}()
 

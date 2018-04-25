@@ -48,7 +48,6 @@ func fetchData() []Graphpoint{
 
 func getWeatherDataHandler(out http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var s = fetchData()
-	printSlice(s)
 	
 	out.Header().Set("Content-Type", "application/json; charset=UTF-8")
 
@@ -57,8 +56,5 @@ func getWeatherDataHandler(out http.ResponseWriter, r *http.Request, _ httproute
 	} else {
 		fmt.Fprintf(out, string(b))
 	}
-	
-	// for _, episode := range q.EpisodeList {
-	// 	fmt.Printf("\t%s\n", episode)
-	// }
+
 }
