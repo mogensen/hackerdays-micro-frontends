@@ -1,9 +1,9 @@
-
 function rerender(sku) {
     // removeListeners();
     document.getElementsByTagName("red-info")[0].setAttribute("sku", sku);
     document.getElementsByTagName("green-recos")[0].setAttribute("sku", sku);
     document.getElementsByTagName("orange-recos")[0].setAttribute("sku", sku);
+    document.getElementsByTagName("historical-graph")[0].setAttribute("sku", sku);
     // addListeners();
 }
 

@@ -33,8 +33,6 @@ services:
     build: ./team-orange
     ports:
      - "3004:3004"
-#   volumes:
-#     - ./team-orange/src:/go/src/app
 
   auth:
     build: ./auth
@@ -42,3 +40,8 @@ services:
      - "3005:3005"
     volumes:
      - ./auth/src:/code/src
+
+  historical:
+    build: ./historical
+    ports:
+     - "3006:3006"

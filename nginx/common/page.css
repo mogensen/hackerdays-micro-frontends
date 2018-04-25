@@ -38,7 +38,8 @@ dd {
     grid-template-areas:
       'info info'
       'reco reco'
-      'orange orange';
+      'orange orange'
+      'historical-graph historical-graph';
     grid-template-columns: 4fr 8fr;
   }
 }
@@ -47,7 +48,8 @@ dd {
   #app {
     grid-template-areas:
       'info   info   reco'
-      'orange orange reco';
+      'orange orange orange'
+      'historical-graph historical-graph historical-graph';
     grid-template-columns: 4fr 3fr 200px;
     width: 1000px;
   }
@@ -60,6 +62,11 @@ dd {
 
 #info {
   grid-area: info;
+}
+
+#historical-graph {
+  grid-area: historical-graph;
+  height: 340px;
 }
 
 #store {

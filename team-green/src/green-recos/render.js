@@ -7,7 +7,7 @@ export default function renderRecos(reco) {
     content = reco.map(id => `<img src="./green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('');
   } else {
     // return '';
-    content = [1, 2, 3].map(() => `<img src="${placeholder}" role="presentation" />`).join('');
+    content = [1].map(() => `<img src="${placeholder}" role="presentation" />`).join('');
   }
 
   return `
