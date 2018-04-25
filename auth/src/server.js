@@ -14,7 +14,7 @@ function generateAuthToken() {
 	var mysignature = CryptoJS.HmacSHA256(mytext, mykey);
 	var mybase64Bits = CryptoJS.enc.Base64.stringify(mysignature);
   var myauth = encodeURIComponent("type=master&ver=1.0&sig=" + mybase64Bits);
-  return {"token": myauth};
+  return {"token": myauth, "validity": UTCstring};
 }
 
 app.use(morgan('dev'));

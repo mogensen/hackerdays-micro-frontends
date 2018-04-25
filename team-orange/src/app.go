@@ -30,6 +30,9 @@ func main() {
 	router.GET("/orange/graph/", renderHandler)
 	router.GET("/orange/graph/:type", renderHandler)
 
+	router.GET("/orange/iot/", iotHandler)
+	router.GET("/orange/iot/:type", iotHandler)
+
 	server := manners.NewWithServer(&http.Server{Addr: ":3004", Handler: router})
 	go func() {		
 		fmt.Println("Http server up and running")
