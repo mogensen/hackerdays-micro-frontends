@@ -54,7 +54,9 @@ func fetchData() []Graphpoint{
 			var temperatur = new(Graphpoint)
 			temperatur.Timestamp = parseDate(time.From)
 
-			temperatur.Temperature = time.Temperature[0]	
+			temperatur.Pressure = time.Pressure[0]
+			temperatur.Precipitation = time.Precipitation[0]
+			temperatur.Temperature = time.Temperature[0]
 			s = append(s, *temperatur)	
 		}
 		return s

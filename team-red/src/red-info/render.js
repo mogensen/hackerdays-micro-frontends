@@ -1,10 +1,10 @@
 const product = {
-  name: 'Weater Stats',
+  name: 'Skanderborg, Danmark',
   variants: [
     {
       sku: 'temperature',
       color: 'red',
-      name: 'Temperature',
+      name: 'Temperatur',
       image: '/red/images/thermometer.png',
       thumb: '/red/images/thermometer.png',
       price: '66,00 €',
@@ -12,17 +12,17 @@ const product = {
     {
       sku: 'pressure',
       color: 'green',
-      name: 'Pressure',
+      name: 'Lufttruk',
       image: '/red/images/pressure.png',
       thumb: '/red/images/pressure.png',
       price: '54,00 €',
     },
     {
-      sku: 'windspeed',
+      sku: 'precipitation',
       color: 'blue',
-      name: 'Windspeed',
-      image: '/red/images/windmill.png',
-      thumb: '/red/images/windmill.png',
+      name: 'Forventet regn',
+      image: '/red/images/precipitation.png',
+      thumb: '/red/images/precipitation.png',
       price: '58,00 €',
     },
   ],
@@ -43,7 +43,7 @@ export default function renderBuy(sku = 'temperature') {
   return `
       <h1 id="store">YR Weather service</h1>
       
-      <h2 id="name">${product.name} <small>${variant.name}</small></h2>
+      <h2 id="name">${product.name} - ${variant.name}</h2>
       <div id="options">${product.variants.map(v => renderOption(v, sku)).join('')}</div>
       `;
 }
