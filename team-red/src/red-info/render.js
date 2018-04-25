@@ -31,7 +31,7 @@ const product = {
 function renderOption(variant, sku) {
   const active = sku === variant.sku ? 'active' : '';
   return `
-  <a href="/${variant.sku}" class="${active}" type="button" data-sku="${variant.sku}">
+  <a href="/${variant.sku}" class="${active}" type="button" data-sku="${variant.sku}" onclick="window.skuchanged(event, this)">
   <img src="${variant.thumb}" alt="${variant.name}" />
   </a>
   `;
