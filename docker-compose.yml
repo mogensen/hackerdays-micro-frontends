@@ -35,3 +35,10 @@ services:
      - "3004:3004"
 #   volumes:
 #     - ./team-orange/src:/go/src/app
+
+  auth:
+    build: ./auth
+    ports:
+     - "3005:3005"
+    volumes:
+     - ./auth/src:/code/src
