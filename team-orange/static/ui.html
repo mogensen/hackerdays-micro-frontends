@@ -1,7 +1,12 @@
+<link rel="import" href="/common/c3.html">
+<link href="/orange/static/ui.css" rel="stylesheet">
+
+
+<script>
 /* eslint-disable no-use-before-define, no-console, class-methods-use-this */
 /* globals HTMLElement, window, CustomEvent 123*/
 
-class HistoricalGraph extends HTMLElement {
+class OrangeRecos extends HTMLElement {
     static get observedAttributes() {
         return ['sku'];
     }
@@ -18,27 +23,29 @@ class HistoricalGraph extends HTMLElement {
         const sku = this.getAttribute('sku');
         var output = []
         var div = document.createElement("div");
-        div.setAttribute("id", "historical-chart");
+        div.setAttribute("id", "chart");
 
         this.innerHTML = div.outerHTML;
-        var dataline = 'Value';
+        var dataline = "";
         var ylabel = "";
-        var useSku = sku;
+
         if (sku == "temperature") {
-            ylabel = 'Temp (C)';
+            dataline = 'Temperature.Value'
+            ylabel =  'Temp (C)';
         } else if (sku == "precipitation") {
-            ylabel = 'Luftfugtughed i %'
-            useSku = "humidity";
+            dataline = 'Precipitation.Value'
+            ylabel = 'Regn i mm'
         } else if (sku == "pressure") {
+            dataline = 'Pressure.Value'
             ylabel = 'Mm kviksølv'
         }
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', "/historical/iot/" + useSku);
+        xhr.open('GET', "/orange/api/weather/");
         xhr.onload = function () {
             if (xhr.status === 200) {
                 var chart = c3.generate({
-                    bindto: "#historical-chart",
+                    bindto: "#chart",
                     data: {
                         xFormat: '%Y-%m-%dT%H:%M:%SZ',
                         json: JSON.parse(xhr.responseText),
@@ -46,7 +53,7 @@ class HistoricalGraph extends HTMLElement {
                             x: 'Timestamp',
                             value: [dataline],
                         },
-
+                        
                     },
                     axis: {
                         x: {
@@ -75,8 +82,14 @@ class HistoricalGraph extends HTMLElement {
         this.log('disconnected', sku);
     }
     log(...args) {
-        console.log('🖼️ historical-graph', ...args);
+        console.log('🖼️ orange-recos', ...args);
     }
 }
 
-window.customElements.define('historical-graph', HistoricalGraph);
+
+
+    //only for registering the custom element define abouve.
+    (function() {
+        window.customElements.define('orange-recos', OrangeRecos);
+    })();
+</script>

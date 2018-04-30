@@ -55,18 +55,8 @@ dd {
   }
 }
 
-#orange {
-  grid-area: orange;
-  height: 340px;
-}
-
 #info {
   grid-area: info;
-}
-
-#historical-graph {
-  grid-area: historical-graph;
-  height: 340px;
 }
 
 #store {
@@ -222,12 +212,6 @@ dd {
 red-info {
   display: block;
   outline: 3px dashed darkred;
-  width: 100%;
-}
-
-orange-recos {
-  display: block;
-  outline: 3px dashed orange;
   width: 100%;
 }
 

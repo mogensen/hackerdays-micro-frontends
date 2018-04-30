@@ -1,0 +1,12 @@
+
+orange-recos {
+    display: block;
+    outline: 3px dashed orange;
+    width: 100%;
+  }
+
+  #orange {
+    grid-area: orange;
+    height: 340px;
+  }
+    
