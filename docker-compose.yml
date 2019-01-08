@@ -1,35 +1,26 @@
-version: '2'
+version: '3.3'
 services:
   nginx:
-    image: nginx:1-alpine
-    volumes:
-     - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
-     - ./nginx/common:/usr/share/nginx/html/common
+    build: ./nginx
     ports:
      - "3000:3000"
 
-  team_blue:
+  team-blue:
     build: ./team-blue
     ports:
      - "3001:3001"
-    volumes:
-     - ./team-blue/src:/code/src
 
-  team_green:
+  team-green:
     build: ./team-green
     ports:
      - "3002:3002"
-    volumes:
-     - ./team-green/src:/code/src
 
-  team_red:
+  team-red:
     build: ./team-red
     ports:
      - "3003:3003"
-    volumes:
-     - ./team-red/src:/code/src
 
-  team_orange:
+  team-orange:
     build: ./team-orange
     ports:
      - "3004:3004"
@@ -38,8 +29,6 @@ services:
     build: ./auth
     ports:
      - "3005:3005"
-    volumes:
-     - ./auth/src:/code/src
 
   historical:
     build: ./historical

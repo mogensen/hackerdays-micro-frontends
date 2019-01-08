@@ -25,7 +25,7 @@ class RedInfo extends HTMLElement {
 
   render() {
     const sku = this.getAttribute('sku');
-    this.innerHTML = renderHtml(sku)
+      this.innerHTML = renderHtml(sku);
   }
 
   disconnectedCallback() {
